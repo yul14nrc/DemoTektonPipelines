@@ -2,7 +2,7 @@
 ## 1. Prerequisites
 - K8s cluster to install the tekton pipelines instance.
 ## 2. Installing tekton pipelines resources
-- Run the following commands to install the latest tekton pipelines resources
+- Run the following commands to install the latest tekton pipelines resources.
 
 `kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml`
 
@@ -12,7 +12,7 @@
 
 `kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/release.yaml`
 
-- Run the following command to check the pod status
+- Run the following command to check the pod status.
 
 `kubectl get pods -n tekton-pipelines`
 
@@ -28,5 +28,27 @@ tekton-triggers-controller-6974c7d74b-vkqvz          1/1     Running   0        
 tekton-triggers-core-interceptors-7cbd98668b-vgjd4   1/1     Running   0          5d21h
 tekton-triggers-webhook-789d5f5bd4-xsnm7             1/1     Running   0          5d21h
 ````
-## 3. Installing tekton pipeline demo
+## 3. Creating a demo namespace
+- Run the following command to create a demo namespace.
+
+`kubectl create namespace demopipelines`
+
+## 4. Installing tekton pipeline demo
 - Run the following commands to install a demo pipeline with all the tasks associated.
+
+`kubectl apply -f DemoPipelines/tasks/`
+
+`kubectl apply -f DemoPipelines/pipelines/`
+
+## 5. Exposing the tekton dashboard
+- In order to check the pipelinerun status expose the tekton dashboard to a localhost port using the following command:
+
+`kubectl port-forward svc/tekton-dashboard 9097:9097 -n tekton-pipelines`
+
+- Open a browser a navigate to https://localhost:9097 to open the tekton dashboard.
+## 6. Running the tekton pipeline demo
+- To run the tekton pipeline demo run the following command:
+
+`kubectl create -f DemoPipelines/pipelines/pipelinerun.yaml`
+
+- Use the tekton dashboard to check the pipeline result.
