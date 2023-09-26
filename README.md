@@ -1,6 +1,7 @@
 # Running Tekton pipelines demo in k8s
 ## 1. Prerequisites
-- K8s cluster to install the tekton pipelines instance.
+- k8s cluster to install the tekton pipelines instance.
+- kubectl cli installed to comunicate with k8s cluster.
 ## 2. Installing tekton pipelines resources
 - Run the following commands to install the latest tekton pipelines resources.
 
