@@ -49,6 +49,6 @@ tekton-triggers-webhook-789d5f5bd4-xsnm7             1/1     Running   0        
 ## 6. Running the tekton pipeline demo
 - To run the tekton pipeline demo run the following command:
 
-`kubectl create -f DemoPipelines/pipelines/pipelinerun.yaml`
+`kubectl create -f DemoPipelines/pipelinerun.yaml`
 
 - Use the tekton dashboard to check the pipeline result.
