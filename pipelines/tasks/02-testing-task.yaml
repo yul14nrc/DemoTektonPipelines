@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: testing
-  namespace: tekton-pipelines
+  namespace: demopipelines
 spec:
   params:
   - name: user
