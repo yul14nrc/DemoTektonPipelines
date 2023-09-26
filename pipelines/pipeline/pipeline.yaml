@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: demo-pipeline
-  namespace: tekton-pipelines
+  namespace: demopipelines
 spec:
   params:
   - name: username
