@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: welcome
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: user
+      description: user name.
+      default: john.doe
+      type: string
+  steps:
+    - name: echo
+      image: alpine
+      script: |
+        #!/bin/sh
+        echo "Welcome $(params.user) to tekton pipelines"
