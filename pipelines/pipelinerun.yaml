@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: demo-pipeline-run
-  namespace: tekton-pipelines
+  namespace: demopipelines
 spec:
   pipelineRef:
     name: demo-pipeline
