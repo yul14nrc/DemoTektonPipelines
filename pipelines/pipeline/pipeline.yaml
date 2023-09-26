@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: demo-pipeline
+  namespace: tekton-pipelines
+spec:
+  params:
+  - name: username
+    type: string
+  tasks:
+    - name: welcome
+      taskRef:
+        name: welcome
+      params:
+      - name: user
+        value: $(params.username)
+    - name: testing
+      runAfter:
+        - welcome
+      taskRef:
+        name: testing
+      params:
+      - name: user
+        value: $(params.username)
