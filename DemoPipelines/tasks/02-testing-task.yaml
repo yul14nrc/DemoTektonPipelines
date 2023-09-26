@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: testing
+  namespace: demopipelines
+spec:
+  params:
+  - name: user
+    type: string
+  steps:
+    - name: echo-testing
+      image: ubuntu
+      script: |
+        #!/bin/bash
+        echo "User '$(params.user)' is running some tekton tests!"
