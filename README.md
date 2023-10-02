@@ -72,7 +72,7 @@ tekton-triggers-webhook-789d5f5bd4-xsnm7             1/1     Running   0        
 
 `kubectl apply -f DemoPipelines/tasks/`
 
-`kubectl apply -f DemoPipelines/pipelines/`
+`kubectl apply -f DemoPipelines/pipeline/`
 
 ## 5. Exposing the tekton dashboard
 - In order to check the pipelinerun status expose the tekton dashboard to a localhost port using the following command:
