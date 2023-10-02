@@ -22,21 +22,30 @@
 
 - Put your nginx ingress public IP on `<NGINX_INGRESS_IP>` and run the following commands to replace the nginx ingress public IP in the required resources.
 
-`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/release.yaml`
-
-`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/tekton-dashboard-ingress.yaml`
+`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/release.yaml apps/tekton/tekton-dashboard-ingress.yaml`
  
 ## 3. Installing tekton pipelines resources.
 - Run the following commands to install the latest tekton pipelines resources.
 
+### Tekton pipelines release v0.52.0:
+
 `kubectl apply -f apps/tekton/release.yaml`
 
-`kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml`
+### Tekton triggers release v0.25.0:
 
-`kubectl apply --filename https://storage.googleapis.com/tekton-releases/triggers/latest/interceptors.yaml`
+`kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.25.0/release.yaml`
 
-`kubectl apply --filename https://storage.googleapis.com/tekton-releases/dashboard/latest/release.yaml`
+### Tekton triggers interceptors release v0.25.0:
 
+`kubectl apply -f https://storage.googleapis.com/tekton-releases/triggers/previous/v0.25.0/interceptors.yaml`
+
+### Tekton dashboard release v0.40.1:
+
+`kubectl apply -f https://storage.googleapis.com/tekton-releases/dashboard/previous/v0.40.1/release-full.yaml`
+
+### Tekton dashboard ingress:
+
+`kubectl apply -f apps/tekton/tekton-dashboard-ingress.yaml`
 - Run the following command to check the pod status.
 
 `kubectl get pods -n tekton-pipelines`
