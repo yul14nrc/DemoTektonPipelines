@@ -22,7 +22,7 @@
 
 - Put your nginx ingress public IP on `<NGINX_INGRESS_IP>` and run the following commands to replace the nginx ingress public IP in the required resources.
 
-`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/release.yaml apps/tekton/tekton-dashboard-ingress.yaml`
+`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/release.yaml apps/tekton/tekton-dashboard-ingress.yaml apps/grafana/grafana.yaml`
  
 ## 3. Installing tekton pipelines resources.
 - Run the following commands to install the latest tekton pipelines resources.
