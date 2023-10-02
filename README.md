@@ -1,7 +1,13 @@
 # Running Tekton pipelines demo in k8s
 ## 1. Prerequisites
-- k8s cluster to install the tekton pipelines instance.
+- k8s cluster to install the tekton pipelines instance (tested with 3 cluster nodes with 2 vCPUs and 4 GB memory).
+- Nginx ingress controller installed (if not is installed follow [this](https://kubernetes.github.io/ingress-nginx/deploy/) procedure to install it).
+- Cert-manager installed (if not is installed follow [this](https://cert-manager.io/docs/installation/helm/) procedure to install it).
 - kubectl cli installed to comunicate with k8s cluster.
+- Helm cli installed to deploy required resources.
+
+## 2. Create the ClusterIssuer to generate the TLS certificates.
+  
 ## 2. Installing tekton pipelines resources
 - Run the following commands to install the latest tekton pipelines resources.
 
