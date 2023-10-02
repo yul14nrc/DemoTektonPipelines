@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging-http01-issuer
+  namespace: cert-manager
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: <EMAIL>
+    privateKeySecretRef:
+      name: letsencrypt-staging-http01-issuer
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
