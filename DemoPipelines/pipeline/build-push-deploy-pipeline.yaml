@@ -1,0 +1,62 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: build-push-deploy-pipeline
+  namespace: demopipelines
+spec:
+  params:
+    - name: repository_url
+    - name: repository_commit
+    - name: container_image
+    - name: container_tag
+    - name: docker_secret_name
+    - name: ingress_public_ip
+  workspaces:
+    - name: shared-data
+  description: |
+    This workspace will receive the cloned git repo and be passed
+    to the next Task for the repo's README.md file to be read.
+  tasks:
+    - name: fetch-repo
+      taskRef:
+        name: git-clone
+      params:
+        - name: url
+          value: $(params.repository_url) # <your git-repo url>
+        - name: revision
+          value: $(params.repository_commit) # <repo commit>
+      workspaces:
+        - name: output
+          workspace: shared-data
+    - name: build-container-image
+      runAfter: ["fetch-repo"]
+      taskRef:
+        name: build-push-docker-image-task
+      params:
+        - name: app_repo
+          value: dir:///workspace/output/
+        - name: container_image
+          value: $(params.container_image) # <image name, give a name of your choice for image>
+        - name: container_tag
+          value: $(params.container_tag) # <image tag>
+        - name: secret-name
+          value: $(params.docker_secret_name) # <name of the secret that has docker credentials>
+      workspaces:
+      - name: output
+        workspace: shared-data
+    - name: deploy-to-cluster
+      runAfter: ["build-container-image"]
+      taskRef:
+        name: deploy-to-cluster-task
+      params:
+        - name: charts_dir
+          value: /workspace/output/helm/nodejs-welcome
+        - name: tag
+          value: $(params.container_tag)
+        - name: image
+          value: $(params.container_image)
+        - name: ingress_public_ip
+          value: $(params.ingress_public_ip)
+      workspaces:
+      - name: output
+        workspace: shared-data
