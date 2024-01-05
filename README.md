@@ -22,7 +22,7 @@
 
 - Put your nginx ingress public IP on `<NGINX_INGRESS_IP>` and run the following commands to replace the nginx ingress public IP in the required resources.
 
-`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/release.yaml apps/tekton/tekton-dashboard-ingress.yaml apps/grafana/grafana.yaml`
+`sed -i -e "s/W.X.Y.Z/<NGINX_INGRESS_IP>/g" apps/tekton/release.yaml apps/tekton/tekton-dashboard-ingress.yaml apps/grafana/grafana.yaml DemoPipelines/build-push-deploy-run.yaml`
  
 ## 3. Installing tekton pipelines resources.
 - Run the following commands to install the latest tekton pipelines resources.
@@ -77,12 +77,25 @@ tekton-triggers-webhook-789d5f5bd4-xsnm7             1/1     Running   0        
 
 `kubectl create namespace demopipelines`
 
-## 7. Installing tekton pipeline demo.
-- Run the following commands to install a demo pipeline with all the tasks associated.
+## 7. Installing tekton demo pipelines.
+
+- (Optional) If you want to run a simple CI/CD demo pipeline you have to create a private docker registry to push and pull docker images and the create the kubernetes secret using the following command:
+
+`kubectl create secret docker-registry <secret-name> --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>`
+
+Then run the following command to replace the secret name on the service account:
+
+`sed -i -e "s/SECRET_NAME/<your-secret-name>/g" DemoPipelines/resources/sa.yaml`
+
+- Run the following commands to install demo pipelines with all the tasks associated.
+
+`kubectl apply -f DemoPipelines/resources/`
 
 `kubectl apply -f DemoPipelines/tasks/`
 
 `kubectl apply -f DemoPipelines/pipeline/`
+
+**NOTE**: 
 
 ## 8. Running the tekton pipeline demo.
 - To run the tekton pipeline demo run the following command:
