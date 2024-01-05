@@ -79,7 +79,7 @@ tekton-triggers-webhook-789d5f5bd4-xsnm7             1/1     Running   0        
 
 ## 7. Installing tekton demo pipelines.
 
-- (Optional) If you want to run a simple CI/CD demo pipeline you have to create a private docker registry to push and pull docker images and the create the kubernetes secret using the following command:
+- **(Optional)** If you want to run a simple CI/CD demo pipeline you have to create a private docker registry to push and pull docker images and the create the kubernetes secret using the following command:
 
 `kubectl create secret docker-registry <secret-name> --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>`
 
@@ -95,12 +95,12 @@ Then run the following command to replace the secret name on the service account
 
 `kubectl apply -f DemoPipelines/pipeline/`
 
-**NOTE**: 
-
 ## 8. Running the tekton pipeline demo.
-- To run the tekton pipeline demo run the following command:
+- To run the tekton demo pipelines run the following commands:
 
 `kubectl create -f DemoPipelines/pipelinerun.yaml`
+
+`kubectl create -f DemoPipelines/build-push-deploy-run.yaml`
 
 - Use the tekton dashboard to check the pipeline result.
 
