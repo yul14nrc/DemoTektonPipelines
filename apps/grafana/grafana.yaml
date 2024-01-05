@@ -15,7 +15,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 5Gi
+      storage: 8Gi
 ---
 # Source: grafana/templates/deploy.yaml
 apiVersion: apps/v1
@@ -103,9 +103,9 @@ metadata:
   name: grafana-cert
   namespace: grafana
 spec:
-  commonName: grafana.W.X.Y.Z.nip.io
+  commonName: grafana.35.226.152.198.nip.io
   dnsNames:
-    - grafana.W.X.Y.Z.nip.io
+    - grafana.35.226.152.198.nip.io
   issuerRef:
     name: letsencrypt-staging-http01-issuer
     kind: ClusterIssuer
@@ -120,7 +120,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "grafana.W.X.Y.Z.nip.io"
+  - host: "grafana.35.226.152.198.nip.io"
     http:
       paths:
         - pathType: Prefix
@@ -132,5 +132,5 @@ spec:
                 number: 3000
   tls:
   - hosts:
-    - "grafana.W.X.Y.Z.nip.io"
+    - "grafana.35.226.152.198.nip.io"
     secretName: grafana-tls

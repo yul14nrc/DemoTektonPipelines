@@ -1,0 +1,34 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: build-push-deploy-run-
+  namespace: demopipelines
+spec:
+  serviceAccountName: demopipeline-sa
+  pipelineRef:
+    name: build-push-deploy-pipeline
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  params:
+    - name: repository_url
+      value: https://github.com/yul14nrc/nodejs-sample
+    - name: repository_commit
+      value: d7ce90ee9383652dde52e950e332d8ea23fc0522
+    - name: container_image
+      value: us-east1-docker.pkg.dev/solid-muse-410021/tektondemo/sampleapp
+    - name: container_tag
+      value: 1.0.0-abcdefg
+    - name: docker_secret_name
+      value: gcp-registry
+    - name: ingress_public_ip
+      value: "35.226.152.198"
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 500Mi
