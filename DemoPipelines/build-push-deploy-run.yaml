@@ -22,7 +22,7 @@ spec:
     - name: docker_secret_name
       value: gcp-registry
     - name: ingress_public_ip
-      value: "35.226.152.198"
+      value: "W.X.Y.Z"
   workspaces:
     - name: shared-data
       volumeClaimTemplate:
