@@ -103,9 +103,9 @@ metadata:
   name: grafana-cert
   namespace: grafana
 spec:
-  commonName: grafana.35.226.152.198.nip.io
+  commonName: grafana.W.X.Y.Z.nip.io
   dnsNames:
-    - grafana.35.226.152.198.nip.io
+    - grafana.W.X.Y.Z.nip.io
   issuerRef:
     name: letsencrypt-staging-http01-issuer
     kind: ClusterIssuer
@@ -120,7 +120,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "grafana.35.226.152.198.nip.io"
+  - host: "grafana.W.X.Y.Z.nip.io"
     http:
       paths:
         - pathType: Prefix
@@ -132,5 +132,5 @@ spec:
                 number: 3000
   tls:
   - hosts:
-    - "grafana.35.226.152.198.nip.io"
+    - "grafana.W.X.Y.Z.nip.io"
     secretName: grafana-tls
